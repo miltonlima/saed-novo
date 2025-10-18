@@ -1,8 +1,63 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Bem-vindo ao SAED";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="welcome-container text-center py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <h1 class="display-4 text-primary mb-4">🎓 Bem-vindo ao SAED</h1>
+
+            <div class="card shadow-sm mb-4">
+                <div class="card-body p-4">
+                    <h3 class="card-title text-success mb-3">Sistema de Apoio Educacional Dinâmico</h3>
+
+                    <div class="row mt-3">
+                        <div class="col-md-6">
+                            <h4 class="text-info">👨‍🏫 Para Professores</h4>
+                            <p class="lead">Organize suas turmas, acompanhe matrículas e gere relatórios para acompanhar o progresso dos alunos.</p>
+                            <ul class="list-unstyled">
+                                <li>✅ Gerenciamento de turmas e modalidades</li>
+                                <li>✅ Acesso rápido às informações dos estudantes</li>
+                                <li>✅ Ferramentas para acompanhar progresso</li>
+                            </ul>
+                        </div>
+
+                        <div class="col-md-6">
+                            <h4 class="text-warning">👩‍🎓 Para Estudantes</h4>
+                            <p class="lead">Consulte suas turmas, veja modalidades disponíveis e mantenha seus dados atualizados.</p>
+                            <ul class="list-unstyled">
+                                <li>✅ Visualizar matrículas</li>
+                                <li>✅ Informações sobre turmas</li>
+                                <li>✅ Explorar modalidades</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="mt-4">
+                        <a class="btn btn-primary btn-lg me-3" asp-controller="Pessoas" asp-action="Index">
+                            <i class="fas fa-users"></i> Ver Matrículas
+                        </a>
+                        <a class="btn btn-outline-secondary btn-lg" asp-controller="Modalidades" asp-action="Index">
+                            <i class="fas fa-book-open"></i> Modalidades
+                        </a>
+                    </div>
+
+                    <div class="mt-4 text-muted">
+                        <em>“Educação é o passaporte para o futuro, pois o amanhã pertence àqueles que se preparam hoje.”</em>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+
+<style>
+.welcome-container {
+    background: linear-gradient(135deg, #f7fbff 0%, #e8f0fb 100%);
+    min-height: 60vh;
+}
+.card { border: none; }
+.display-4 { font-weight: 300; }
+.btn-lg { border-radius: 22px; }
+.list-unstyled li { padding: 4px 0; }
+</style>
