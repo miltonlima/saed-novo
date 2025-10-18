@@ -37,7 +37,13 @@ namespace MvcMovie.Controllers
         // GET: Turmas/Create
         public IActionResult Create()
         {
-            return View();
+            var anoAtual = DateTime.Now.Year;
+            var turma = new Turma
+            {
+                DataInicio = new DateTime(anoAtual, 1, 1),
+                DataFim = new DateTime(anoAtual, 12, 31)
+            };
+            return View(turma);
         }
 
         // POST: Turmas/Create
