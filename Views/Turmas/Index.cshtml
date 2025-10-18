@@ -1,0 +1,36 @@
+@model IEnumerable<MvcMovie.Models.Turma>
+@{
+    ViewData["Title"] = "Turmas";
+}
+<h1>Turmas</h1>
+<p>
+    <a asp-action="Create" class="btn btn-primary">Cadastrar Nova Turma</a>
+</p>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.Nome)</th>
+            <th>@Html.DisplayNameFor(model => model.DataInicio)</th>
+            <th>@Html.DisplayNameFor(model => model.DataFim)</th>
+            <th>@Html.DisplayNameFor(model => model.Status)</th>
+            <th>@Html.DisplayNameFor(model => model.DataCriacao)</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>@Html.DisplayFor(modelItem => item.Nome)</td>
+            <td>@Html.DisplayFor(modelItem => item.DataInicio)</td>
+            <td>@Html.DisplayFor(modelItem => item.DataFim)</td>
+            <td>@Html.DisplayFor(modelItem => item.Status)</td>
+            <td>@Html.DisplayFor(modelItem => item.DataCriacao)</td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning btn-sm">Editar</a>
+                <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info btn-sm">Detalhes</a>
+                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-sm">Excluir</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

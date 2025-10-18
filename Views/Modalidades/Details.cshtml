@@ -1,0 +1,29 @@
+@model MvcMovie.Models.Modalidade
+@{
+    ViewData["Title"] = "Detalhes da Modalidade";
+}
+<h1>Detalhes</h1>
+<dl class="row">
+    <dt class="col-sm-3">Nome</dt>
+    <dd class="col-sm-9">@Model.Nome</dd>
+    <dt class="col-sm-3">Turmas</dt>
+    <dd class="col-sm-9">
+        @if (!Model.ModalidadesTurmas.Any())
+        {
+            <span>(Nenhuma)</span>
+        }
+        else
+        {
+            <ul class="list-unstyled">
+                @foreach (var mt in Model.ModalidadesTurmas)
+                {
+                    <li>@mt.Turma.Nome</li>
+                }
+            </ul>
+        }
+    </dd>
+</dl>
+<p>
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Editar</a>
+    <a asp-action="Index" class="btn btn-secondary">Voltar à Lista</a>
+</p>

@@ -1,0 +1,41 @@
+@model IEnumerable<MvcMovie.Models.Modalidade>
+@{
+    ViewData["Title"] = "Modalidades";
+}
+<h1>Modalidades</h1>
+<p><a asp-action="Create" class="btn btn-primary">Cadastrar Nova Modalidade</a></p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Turma</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>@item.Nome</td>
+            <td>
+                @if (!item.ModalidadesTurmas.Any())
+                {
+                    <span>(Nenhuma)</span>
+                }
+                else
+                {
+                    <ul class="list-unstyled mb-0">
+                        @foreach (var mt in item.ModalidadesTurmas)
+                        {
+                            <li>@mt.Turma.Nome</li>
+                        }
+                    </ul>
+                }
+            </td>
+            <td>
+                <a asp-action="Details" asp-route-id="@item.Id">Detalhes</a> |
+                <a asp-action="Edit" asp-route-id="@item.Id">Editar</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
