@@ -25,8 +25,8 @@ namespace MvcMovie.Models
         [DataType(DataType.Date)]
         public DateTime DataFim { get; set; }
 
-        [Display(Name = "Status")]
-        public string Status { get; set; }
+    [Display(Name = "Status")]
+    public StatusTurma Status { get; set; } = StatusTurma.Ativa;
 
         [Display(Name = "Data de Criação")]
         [DataType(DataType.DateTime)]
