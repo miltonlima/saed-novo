@@ -37,7 +37,14 @@
                     <option value="">Sem modalidade</option>
                     @foreach (var m in Db.Modalidade.OrderBy(x => x.Nome).ToList())
                     {
-                        <option value="@m.Id" @(m.Id == selectedModalidadeId ? "selected" : "")>@m.Nome</option>
+                        if (m.Id == selectedModalidadeId)
+                        {
+                            <option value="@m.Id" selected="selected">@m.Nome</option>
+                        }
+                        else
+                        {
+                            <option value="@m.Id">@m.Nome</option>
+                        }
                     }
                 </select>
                 <span class="text-muted small">Cada turma pode estar vinculada a apenas uma modalidade.</span>
