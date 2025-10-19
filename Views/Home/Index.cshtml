@@ -2,62 +2,142 @@
     ViewData["Title"] = "Bem-vindo ao SAED";
 }
 
-<div class="welcome-container text-center py-5">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <h1 class="display-4 text-primary mb-4">🎓 Bem-vindo ao SAED</h1>
+<div class="welcome-container py-5">
+    <div class="container">
+        <div class="hero text-center fade-in">
+            <h1 class="display-4 fw-semibold gradient-text mb-2">Bem-vindo ao SAED</h1>
+            <p class="lead text-muted">Sistema de Apoio Educacional para professores e estudantes</p>
+        </div>
 
-            <div class="card shadow-sm mb-4">
-                <div class="card-body p-4">
-                    <h3 class="card-title text-success mb-3">Sistema de Apoio Educacional</h3>
-
-                    <div class="row mt-3">
-                        <div class="col-md-6 text-start">
-                            <h4 class="text-info">👨‍🏫 Para Professores</h4>
-                            <p class="lead">Organize suas turmas, acompanhe matrículas e gere relatórios para acompanhar o progresso dos alunos.</p>
-                            <ul class="list-unstyled">
-                                <li>✅ Gerenciamento de turmas e modalidades</li>
-                                <li>✅ Acesso rápido às informações dos estudantes</li>
-                                <li>✅ Ferramentas para acompanhar progresso</li>
-                            </ul>
-                        </div>
-
-                        <div class="col-md-6 text-start">
-                            <h4 class="text-warning">👩‍🎓 Para Estudantes</h4>
-                            <p class="lead">Consulte suas turmas, veja modalidades disponíveis e mantenha seus dados atualizados.</p>
-                            <ul class="list-unstyled">
-                                <li>✅ Visualizar matrículas</li>
-                                <li>✅ Informações sobre turmas</li>
-                                <li>✅ Explorar modalidades</li>
-                            </ul>
-                        </div>
+        <div class="row g-4 mt-1">
+            <div class="col-md-6">
+                <div class="glass-card h-100 hover-lift p-4">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="feature-icon bg-info-subtle text-info me-3">👨‍🏫</div>
+                        <h4 class="mb-0">Para Professores</h4>
                     </div>
-
-                    <div class="mt-4">
-                        <a class="btn btn-primary btn-lg me-3" asp-controller="Pessoas" asp-action="Index">
-                            <i class="fas fa-users"></i> Ver Matrículas
-                        </a>
-                        <a class="btn btn-outline-secondary btn-lg" asp-controller="Modalidades" asp-action="Index">
-                            <i class="fas fa-book-open"></i> Modalidades
-                        </a>
-                    </div>
-
-                    <div class="mt-4 text-muted">
-                        <em>“Educação é o passaporte para o futuro, pois o amanhã pertence àqueles que se preparam hoje.”</em>
-                    </div>
+                    <p class="text-muted mb-3">Organize turmas, acompanhe matrículas e extraia insights do progresso dos alunos.</p>
+                    <ul class="list-unstyled small text-muted mb-0">
+                        <li>• Gerenciamento de turmas e modalidades</li>
+                        <li>• Acesso rápido às informações dos estudantes</li>
+                        <li>• Ferramentas de acompanhamento</li>
+                    </ul>
                 </div>
             </div>
+
+            <div class="col-md-6">
+                <div class="glass-card h-100 hover-lift p-4">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="feature-icon bg-warning-subtle text-warning me-3">👩‍🎓</div>
+                        <h4 class="mb-0">Para Estudantes</h4>
+                    </div>
+                    <p class="text-muted mb-3">Consulte turmas, descubra modalidades e mantenha seus dados atualizados.</p>
+                    <ul class="list-unstyled small text-muted mb-0">
+                        <li>• Visualizar matrículas</li>
+                        <li>• Informações de turmas</li>
+                        <li>• Explorar modalidades</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="row g-3 mt-4">
+            <div class="col-md-6">
+                <a class="btn btn-gradient w-100 py-3 hover-lift" asp-controller="Pessoas" asp-action="Index">
+                    <span class="me-2">👥</span> Ver Matrículas
+                </a>
+            </div>
+            <div class="col-md-6">
+                <a class="btn btn-outline-glass w-100 py-3 hover-lift" asp-controller="Modalidades" asp-action="Index">
+                    <span class="me-2">📘</span> Modalidades
+                </a>
+            </div>
+        </div>
+
+        <div class="text-center mt-4 text-muted small fade-in-delayed">
+            <em>“Educação é o passaporte para o futuro, pois o amanhã pertence àqueles que se preparam hoje.”</em>
         </div>
     </div>
 </div>
 
 <style>
-.welcome-container {
-    background: linear-gradient(135deg, #f7fbff 0%, #e8f0fb 100%);
-    min-height: 60vh;
+:root {
+    --bg-start: #f7fbff;
+    --bg-end: #e8f0fb;
+    --grad-1: #5b8def;
+    --grad-2: #7a5cf0;
+    --card-bg: rgba(255, 255, 255, 0.6);
+    --card-border: rgba(255, 255, 255, 0.35);
+    --shadow: 0 10px 25px rgba(23, 43, 77, 0.08);
+    --shadow-hover: 0 16px 40px rgba(23, 43, 77, 0.14);
 }
-.card { border: none; }
-.display-4 { font-weight: 300; }
-.btn-lg { border-radius: 22px; }
-.list-unstyled li { padding: 4px 0; }
+
+.welcome-container {
+    background: linear-gradient(135deg, var(--bg-start) 0%, var(--bg-end) 100%);
+    min-height: 65vh;
+    display: flex;
+    align-items: center;
+}
+
+.gradient-text {
+    background: linear-gradient(90deg, var(--grad-1), var(--grad-2));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.glass-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 18px;
+    box-shadow: var(--shadow);
+    backdrop-filter: saturate(140%) blur(12px);
+    -webkit-backdrop-filter: saturate(140%) blur(12px);
+    transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+}
+
+.hover-lift:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-hover);
+}
+
+.feature-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: grid;
+    place-items: center;
+    font-size: 22px;
+}
+
+.btn-gradient {
+    color: #fff;
+    border: 0;
+    border-radius: 14px;
+    background-image: linear-gradient(90deg, var(--grad-1), var(--grad-2));
+    box-shadow: var(--shadow);
+    transition: transform .15s ease, box-shadow .2s ease, filter .2s ease;
+}
+.btn-gradient:hover { color: #fff; filter: brightness(1.03); transform: translateY(-2px); }
+
+.btn-outline-glass {
+    border-radius: 14px;
+    border: 1px solid var(--card-border);
+    background: rgba(255,255,255,0.35);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    color: #334155;
+    box-shadow: var(--shadow);
+    transition: transform .15s ease, box-shadow .2s ease, background .2s ease;
+}
+.btn-outline-glass:hover { background: rgba(255,255,255,0.55); transform: translateY(-2px); }
+
+.fade-in { animation: fadeIn .5s ease both; }
+.fade-in-delayed { animation: fadeIn .7s ease .15s both; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+
+@media (max-width: 576px) {
+    .display-4 { font-size: 2rem; }
+    .feature-icon { width: 44px; height: 44px; font-size: 20px; }
+}
 </style>
