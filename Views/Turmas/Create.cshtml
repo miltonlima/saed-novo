@@ -1,4 +1,5 @@
 @model MvcMovie.Models.Turma
+@inject MvcMovie.Data.MvcMovieContext Db
 @{
     ViewData["Title"] = "Cadastrar Turma";
 }
@@ -23,6 +24,21 @@
                 <input asp-for="DataFim" class="form-control date-mask" type="text" maxlength="10" inputmode="numeric" autocomplete="off" value="" placeholder="dd/mm/aaa" pattern="\d{2}/\d{2}/\d{4}" />
                 <span asp-validation-for="DataFim" class="text-danger"></span>
             </div>
+
+            <!-- Modalidade select -->
+            <div class="form-group mb-3">
+                <label for="SelectedModalidadeId" class="form-label">Modalidade</label>
+                <select id="SelectedModalidadeId" name="SelectedModalidadeId" class="form-select">
+                    <option value="">Selecione...</option>
+                    @foreach (var m in Db.Modalidade.OrderBy(x => x.Nome).ToList())
+                    {
+                        <option value="@m.Id">@m.Nome</option>
+                    }
+                </select>
+                <span class="text-muted small">Cada turma pode estar vinculada a apenas uma modalidade.</span>
+                <span class="text-danger" data-valmsg-for="SelectedModalidadeId" data-valmsg-replace="true"></span>
+            </div>
+
             <div class="form-group mb-3">
                 <label asp-for="Status" class="form-label"></label>
                 <select asp-for="Status" class="form-control" asp-items="Html.GetEnumSelectList<MvcMovie.Models.StatusTurma>()"></select>
