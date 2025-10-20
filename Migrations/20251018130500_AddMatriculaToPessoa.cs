@@ -6,6 +6,6 @@ namespace MvcMovie.Migrations
 {
     public partial class AddMatriculaToPessoa : Migration
     {
-        // Intencionalmente vazio para evitar métodos Up/Down duplicados.
+        // Arquivo removido. Não é utilizado.
     }
 }
