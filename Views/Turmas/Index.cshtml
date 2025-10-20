@@ -1,4 +1,5 @@
 @model IEnumerable<MvcMovie.Models.Turma>
+@inject MvcMovie.Data.MvcMovieContext Db
 @{
     ViewData["Title"] = "Turmas";
 }
@@ -12,6 +13,7 @@
             <th>@Html.DisplayNameFor(model => model.Nome)</th>
             <th>@Html.DisplayNameFor(model => model.DataInicio)</th>
             <th>@Html.DisplayNameFor(model => model.DataFim)</th>
+            <th>Modalidade</th>
             <th>@Html.DisplayNameFor(model => model.Status)</th>
             <th>@Html.DisplayNameFor(model => model.DataCriacao)</th>
             <th>Ações</th>
@@ -19,10 +21,13 @@
     </thead>
     <tbody>
 @foreach (var item in Model) {
+        var modalidadeId = Db.ModalidadeTurma.Where(mt => mt.TurmaId == item.Id).Select(mt => mt.ModalidadeId).FirstOrDefault();
+        var modalidadeNome = modalidadeId > 0 ? Db.Modalidade.Where(m => m.Id == modalidadeId).Select(m => m.Nome).FirstOrDefault() : "-";
         <tr>
             <td>@Html.DisplayFor(modelItem => item.Nome)</td>
             <td>@Html.DisplayFor(modelItem => item.DataInicio)</td>
             <td>@Html.DisplayFor(modelItem => item.DataFim)</td>
+            <td>@(modalidadeNome ?? "-")</td>
             <td>@Html.DisplayFor(modelItem => item.Status)</td>
             <td>@Html.DisplayFor(modelItem => item.DataCriacao)</td>
             <td>
