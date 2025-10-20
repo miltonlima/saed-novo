@@ -19,6 +19,7 @@ namespace MvcMovie.Data
     public DbSet<MvcMovie.Models.Turma> Turma { get; set; } = default!;
     public DbSet<MvcMovie.Models.Modalidade> Modalidade { get; set; } = default!;
     public DbSet<MvcMovie.Models.ModalidadeTurma> ModalidadeTurma { get; set; } = default!;
+    public DbSet<MvcMovie.Models.InscricaoTurma> InscricaoTurma { get; set; } = default!;
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
