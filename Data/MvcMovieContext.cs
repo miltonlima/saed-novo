@@ -48,6 +48,22 @@ namespace MvcMovie.Data
                 .WithMany(t => t.ModalidadesTurmas)
                 .HasForeignKey(mt => mt.TurmaId);
         });
+
+        // InscricaoTurma mapping (explicit table name + FKs + indexes)
+        modelBuilder.Entity<MvcMovie.Models.InscricaoTurma>(entity =>
+        {
+            entity.ToTable("InscricaoTurma");
+            entity.HasOne(i => i.Pessoa)
+                  .WithMany()
+                  .HasForeignKey(i => i.PessoaId)
+                  .OnDelete(DeleteBehavior.Cascade);
+            entity.HasOne(i => i.Turma)
+                  .WithMany()
+                  .HasForeignKey(i => i.TurmaId)
+                  .OnDelete(DeleteBehavior.Cascade);
+            entity.HasIndex(i => i.PessoaId);
+            entity.HasIndex(i => i.TurmaId);
+        });
     }
     }
 }
