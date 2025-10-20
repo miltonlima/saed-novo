@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore.Migrations;
-using Pomelo.EntityFrameworkCore.MySql.Metadata; // Correct namespace for Pomelo
+using Pomelo.EntityFrameworkCore.MySql.Metadata; // Add this using
 
 namespace MvcMovie.Migrations
 {
@@ -11,10 +11,10 @@ namespace MvcMovie.Migrations
                 name: "InscricaoTurma",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", Pomelo.EntityFrameworkCore.MySql.Metadata.MySqlValueGenerationStrategy.IdentityColumn),
-                    PessoaId = table.Column<int>(nullable: false),
-                    TurmaId = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    PessoaId = table.Column<int>(type: "int", nullable: false),
+                    TurmaId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
