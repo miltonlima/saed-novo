@@ -12,7 +12,7 @@ namespace MvcMovie.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                        .Annotation("MySql:ValueGenerationStrategy", Pomelo.EntityFrameworkCore.MySql.Metadata.MySqlValueGenerationStrategy.IdentityColumn),
                     PessoaId = table.Column<int>(nullable: false),
                     TurmaId = table.Column<int>(nullable: false)
                 },
