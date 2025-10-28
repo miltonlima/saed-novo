@@ -1,0 +1,52 @@
+@model MvcMovie.Models.Inscricao
+@{
+    ViewData["Title"] = "Nova Inscrição";
+}
+
+<h1>Nova Inscrição de Aluno em Turma</h1>
+<hr />
+
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            
+            <div class="form-group mb-3">
+                <label for="PessoaId" class="form-label">Aluno</label>
+                <select id="PessoaId" name="PessoaId" class="form-select" required>
+                    <option value="">Selecione um aluno...</option>
+                    @{
+                        var pessoas = (ViewBag.Pessoas as List<MvcMovie.Models.Pessoa>) ?? new List<MvcMovie.Models.Pessoa>();
+                    }
+                    @foreach (var pessoa in pessoas)
+                    {
+                        <option value="@pessoa.Id">@pessoa.Nome (@pessoa.Matricula)</option>
+                    }
+                </select>
+            </div>
+
+            <div class="form-group mb-3">
+                <label for="TurmaId" class="form-label">Turma</label>
+                <select id="TurmaId" name="TurmaId" class="form-select" required>
+                    <option value="">Selecione uma turma...</option>
+                    @{
+                        var turmas = (ViewBag.Turmas as List<MvcMovie.Models.Turma>) ?? new List<MvcMovie.Models.Turma>();
+                    }
+                    @foreach (var turma in turmas)
+                    {
+                        <option value="@turma.Id">@turma.Nome</option>
+                    }
+                </select>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Inscrever" class="btn btn-primary" />
+                <a asp-action="Index" class="btn btn-secondary">Voltar</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

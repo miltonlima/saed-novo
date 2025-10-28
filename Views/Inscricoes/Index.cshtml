@@ -1,0 +1,38 @@
+@model IEnumerable<MvcMovie.Models.Inscricao>
+@{
+    ViewData["Title"] = "Inscrições de Alunos em Turmas";
+}
+
+<h1>Inscrições de Alunos</h1>
+<p>
+    <a asp-action="Create" class="btn btn-primary">Nova Inscrição</a>
+</p>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Aluno</th>
+            <th>Turma</th>
+            <th>Data de Inscrição</th>
+            <th>Status</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>@item.Pessoa.Nome</td>
+            <td>@item.Turma.Nome</td>
+            <td>@item.DataInscricao.ToString("dd/MM/yyyy")</td>
+            <td>
+                <span class="badge bg-success">@item.Status</span>
+            </td>
+            <td>
+                <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-info">Detalhes</a>
+                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-warning">Editar</a>
+                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger">Remover</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
