@@ -48,6 +48,21 @@ namespace MvcMovie.Data
                 .WithMany(t => t.ModalidadesTurmas)
                 .HasForeignKey(mt => mt.TurmaId);
         });
+
+        // Configuração da tabela de junção Inscricao
+        modelBuilder.Entity<MvcMovie.Models.Inscricao>(entity =>
+        {
+            entity.ToTable("inscricao");
+            entity.HasKey(i => new { i.PessoaId, i.TurmaId });
+
+            entity.HasOne(i => i.Pessoa)
+                .WithMany(p => p.Inscricoes)
+                .HasForeignKey(i => i.PessoaId);
+
+            entity.HasOne(i => i.Turma)
+                .WithMany(t => t.Inscricoes)
+                .HasForeignKey(i => i.TurmaId);
+        });
     }
     }
 }

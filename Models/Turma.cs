@@ -33,8 +33,7 @@ namespace MvcMovie.Models
         public DateTime DataCriacao { get; set; } = DateTime.Now;
 
         public ICollection<ModalidadeTurma> ModalidadesTurmas { get; set; } = new List<ModalidadeTurma>();
+
+        public ICollection<Inscricao> Inscricoes { get; set; } = new List<Inscricao>();
     }
 }
-
-// Certifique-se de que só existe UMA definição da classe Turma neste namespace.
-// Remova ou renomeie a duplicata em outro arquivo do projeto.

@@ -11,7 +11,7 @@ using MvcMovie.Data;
 namespace MvcMovie.Migrations
 {
     [DbContext(typeof(MvcMovieContext))]
-    [Migration("20251028202555_InitialCreate")]
+    [Migration("20251028205539_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -23,30 +23,27 @@ namespace MvcMovie.Migrations
 
             modelBuilder.Entity("MvcMovie.Models.Inscricao", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
+                    b.Property<int>("PessoaId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TurmaId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("DataInscricao")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<int>("PessoaId")
+                    b.Property<int>("Id")
                         .HasColumnType("int");
 
                     b.Property<string>("Status")
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<int>("TurmaId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("PessoaId");
+                    b.HasKey("PessoaId", "TurmaId");
 
                     b.HasIndex("TurmaId");
 
-                    b.ToTable("Inscricao");
+                    b.ToTable("inscricao", (string)null);
                 });
 
             modelBuilder.Entity("MvcMovie.Models.Modalidade", b =>
@@ -170,13 +167,13 @@ namespace MvcMovie.Migrations
             modelBuilder.Entity("MvcMovie.Models.Inscricao", b =>
                 {
                     b.HasOne("MvcMovie.Models.Pessoa", "Pessoa")
-                        .WithMany()
+                        .WithMany("Inscricoes")
                         .HasForeignKey("PessoaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("MvcMovie.Models.Turma", "Turma")
-                        .WithMany()
+                        .WithMany("Inscricoes")
                         .HasForeignKey("TurmaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -210,8 +207,15 @@ namespace MvcMovie.Migrations
                     b.Navigation("ModalidadesTurmas");
                 });
 
+            modelBuilder.Entity("MvcMovie.Models.Pessoa", b =>
+                {
+                    b.Navigation("Inscricoes");
+                });
+
             modelBuilder.Entity("MvcMovie.Models.Turma", b =>
                 {
+                    b.Navigation("Inscricoes");
+
                     b.Navigation("ModalidadesTurmas");
                 });
 #pragma warning restore 612, 618

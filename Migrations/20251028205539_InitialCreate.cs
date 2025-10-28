@@ -89,28 +89,27 @@ namespace MvcMovie.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "Inscricao",
+                name: "inscricao",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     PessoaId = table.Column<int>(type: "int", nullable: false),
                     TurmaId = table.Column<int>(type: "int", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false),
                     DataInscricao = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     Status = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Inscricao", x => x.Id);
+                    table.PrimaryKey("PK_inscricao", x => new { x.PessoaId, x.TurmaId });
                     table.ForeignKey(
-                        name: "FK_Inscricao_Pessoa_PessoaId",
+                        name: "FK_inscricao_Pessoa_PessoaId",
                         column: x => x.PessoaId,
                         principalTable: "Pessoa",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Inscricao_Turma_TurmaId",
+                        name: "FK_inscricao_Turma_TurmaId",
                         column: x => x.TurmaId,
                         principalTable: "Turma",
                         principalColumn: "Id",
@@ -144,13 +143,8 @@ namespace MvcMovie.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Inscricao_PessoaId",
-                table: "Inscricao",
-                column: "PessoaId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Inscricao_TurmaId",
-                table: "Inscricao",
+                name: "IX_inscricao_TurmaId",
+                table: "inscricao",
                 column: "TurmaId");
 
             migrationBuilder.CreateIndex(
@@ -162,7 +156,7 @@ namespace MvcMovie.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Inscricao");
+                name: "inscricao");
 
             migrationBuilder.DropTable(
                 name: "modalidade_turma");

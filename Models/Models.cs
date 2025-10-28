@@ -44,6 +44,8 @@ namespace MvcMovie.Models
     [StringLength(15, ErrorMessage = "A matrícula deve ter no máximo 15 números")]
     [Display(Name = "Matrícula")]
     public string Matricula { get; set; } = string.Empty;
+
+    public ICollection<Inscricao> Inscricoes { get; set; } = new List<Inscricao>();
     }
     public enum StatusTurma
     {
