@@ -2,10 +2,6 @@
 @inject MvcMovie.Data.MvcMovieContext Db
 @{
     ViewData["Title"] = "Editar Turma";
-    var selectedModalidadeId = Db.ModalidadeTurma
-        .Where(mt => mt.TurmaId == Model.Id)
-        .Select(mt => mt.ModalidadeId)
-        .FirstOrDefault(); // 0 if none
 }
 <h1>Editar Turma</h1>
 <hr />
@@ -33,15 +29,25 @@
             <!-- Modalidade select -->
             <div class="form-group mb-3">
                 <label for="SelectedModalidadeId" class="form-label">Modalidade</label>
-                <select id="SelectedModalidadeId" name="SelectedModalidadeId" class="form-control">
-                    <option value="">Sem modalidade</option>
-                    @foreach (var m in Db.Modalidade.OrderBy(x => x.Nome).ToList())
+                <select id="SelectedModalidadeId" name="SelectedModalidadeId" class="form-select">
+                    <option value="">Selecione...</option>
+                    @{
+                        var modalidades = (IEnumerable<MvcMovie.Models.Modalidade>)ViewBag.Modalidades ?? new List<MvcMovie.Models.Modalidade>();
+                        var selectedId = (int?)ViewBag.SelectedModalidadeId;
+                    }
+                    @foreach (var modalidade in modalidades)
                     {
-                        <option value="@m.Id" @(m.Id == selectedModalidadeId ? "selected" : "")>@m.Nome</option>
+                        if (selectedId == modalidade.Id)
+                        {
+                            <option value="@modalidade.Id" selected>@modalidade.Nome</option>
+                        }
+                        else
+                        {
+                            <option value="@modalidade.Id">@modalidade.Nome</option>
+                        }
                     }
                 </select>
                 <span class="text-muted small">Cada turma pode estar vinculada a apenas uma modalidade.</span>
-                <span class="text-danger" data-valmsg-for="SelectedModalidadeId" data-valmsg-replace="true"></span>
             </div>
 
             <div class="form-group mb-3">

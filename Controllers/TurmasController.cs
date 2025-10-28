@@ -66,9 +66,15 @@ namespace MvcMovie.Controllers
         {
             if (id == null)
                 return NotFound();
-            var turma = await _context.Turma.FindAsync(id);
+            var turma = await _context.Turma
+                .Include(t => t.ModalidadesTurmas)
+                .FirstOrDefaultAsync(t => t.Id == id);
             if (turma == null)
                 return NotFound();
+            
+            ViewBag.Modalidades = await _context.Modalidade.ToListAsync();
+            ViewBag.SelectedModalidadeId = turma.ModalidadesTurmas.FirstOrDefault()?.ModalidadeId;
+            
             return View(turma);
         }
 
