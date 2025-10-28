@@ -1,3 +1,4 @@
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace MvcMovie.Models
@@ -13,5 +14,7 @@ namespace MvcMovie.Models
         [Required]
         public int TurmaId { get; set; }
         public Turma Turma { get; set; } = null!;
+
+        public DateTime DataInscricao { get; set; }
     }
 }

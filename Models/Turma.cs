@@ -15,24 +15,26 @@ namespace MvcMovie.Models
         [StringLength(100, ErrorMessage = "O campo {0} deve ter entre {2} e {1} caracteres.", MinimumLength = 3)]
         public string Nome { get; set; } = string.Empty;
 
+        public string? Descricao { get; set; }
+
         [Display(Name = "Data de Início")]
-        [Required(ErrorMessage = "O campo {0} é obrigatório.")]
         [DataType(DataType.Date)]
-        public DateTime DataInicio { get; set; }
+        public DateTime? DataInicio { get; set; }
 
         [Display(Name = "Data de Fim")]
-        [Required(ErrorMessage = "O campo {0} é obrigatório.")]
         [DataType(DataType.Date)]
-        public DateTime DataFim { get; set; }
+        public DateTime? DataFim { get; set; }
 
-    [Display(Name = "Status")]
-    public StatusTurma Status { get; set; } = StatusTurma.Ativa;
+        [Display(Name = "Status")]
+        public string? Status { get; set; }
 
         [Display(Name = "Data de Criação")]
         [DataType(DataType.DateTime)]
         public DateTime DataCriacao { get; set; } = DateTime.Now;
 
         public ICollection<ModalidadeTurma> ModalidadesTurmas { get; set; } = new List<ModalidadeTurma>();
+
+        public ICollection<InscricaoTurma> Inscricoes { get; set; } = new List<InscricaoTurma>();
     }
 }
 

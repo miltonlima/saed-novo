@@ -15,11 +15,11 @@ namespace MvcMovie.Data
         }
 
     public DbSet<MvcMovie.Models.Movie> Movie { get; set; } = default!;
-    public DbSet<MvcMovie.Models.Pessoa> Pessoa { get; set; } = default!;
-    public DbSet<MvcMovie.Models.Turma> Turma { get; set; } = default!;
+    public DbSet<Pessoa> Pessoa { get; set; }
+    public DbSet<Turma> Turma { get; set; }
     public DbSet<MvcMovie.Models.Modalidade> Modalidade { get; set; } = default!;
     public DbSet<MvcMovie.Models.ModalidadeTurma> ModalidadeTurma { get; set; } = default!;
-    public DbSet<MvcMovie.Models.InscricaoTurma> InscricaoTurma { get; set; } = default!;
+    public DbSet<InscricaoTurma> InscricaoTurma { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -49,21 +49,23 @@ namespace MvcMovie.Data
                 .HasForeignKey(mt => mt.TurmaId);
         });
 
-        // InscricaoTurma mapping (explicit table name + FKs + indexes)
-        modelBuilder.Entity<MvcMovie.Models.InscricaoTurma>(entity =>
-        {
-            entity.ToTable("InscricaoTurma");
-            entity.HasOne(i => i.Pessoa)
-                  .WithMany()
-                  .HasForeignKey(i => i.PessoaId)
-                  .OnDelete(DeleteBehavior.Cascade);
-            entity.HasOne(i => i.Turma)
-                  .WithMany()
-                  .HasForeignKey(i => i.TurmaId)
-                  .OnDelete(DeleteBehavior.Cascade);
-            entity.HasIndex(i => i.PessoaId);
-            entity.HasIndex(i => i.TurmaId);
-        });
+        modelBuilder.Entity<Pessoa>().ToTable("Pessoa");
+        modelBuilder.Entity<Turma>().ToTable("Turma");
+        modelBuilder.Entity<InscricaoTurma>().ToTable("InscricaoTurma");
+
+        modelBuilder.Entity<InscricaoTurma>()
+            .HasIndex(i => new { i.PessoaId, i.TurmaId })
+            .IsUnique();
+
+        modelBuilder.Entity<InscricaoTurma>()
+            .HasOne(i => i.Pessoa)
+            .WithMany(p => p.Inscricoes)
+            .HasForeignKey(i => i.PessoaId);
+
+        modelBuilder.Entity<InscricaoTurma>()
+            .HasOne(i => i.Turma)
+            .WithMany(t => t.Inscricoes)
+            .HasForeignKey(i => i.TurmaId);
     }
     }
 }
