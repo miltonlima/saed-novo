@@ -8,37 +8,34 @@ namespace MvcMovie.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            // Tabela Pessoa
             migrationBuilder.CreateTable(
                 name: "Pessoa",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Nome = table.Column<string>(maxLength: 100, nullable: false)
-                    // ...adicione outros campos necessários...
+                    Nome = table.Column<string>(maxLength: 100, nullable: false),
+                    Email = table.Column<string>(maxLength: 100, nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Pessoa", x => x.Id);
                 });
 
-            // Tabela Turma
             migrationBuilder.CreateTable(
                 name: "Turma",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Nome = table.Column<string>(maxLength: 100, nullable: false)
-                    // ...adicione outros campos necessários...
+                    Nome = table.Column<string>(maxLength: 100, nullable: false),
+                    Descricao = table.Column<string>(maxLength: 255, nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Turma", x => x.Id);
                 });
 
-            // Tabela InscricaoTurma
             migrationBuilder.CreateTable(
                 name: "InscricaoTurma",
                 columns: table => new
@@ -46,7 +43,8 @@ namespace MvcMovie.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     PessoaId = table.Column<int>(nullable: false),
-                    TurmaId = table.Column<int>(nullable: false)
+                    TurmaId = table.Column<int>(nullable: false),
+                    DataInscricao = table.Column<DateTime>(nullable: false, defaultValueSql: "CURRENT_TIMESTAMP")
                 },
                 constraints: table =>
                 {
@@ -79,9 +77,12 @@ namespace MvcMovie.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(name: "InscricaoTurma");
-            migrationBuilder.DropTable(name: "Turma");
-            migrationBuilder.DropTable(name: "Pessoa");
+            migrationBuilder.DropTable(
+                name: "InscricaoTurma");
+            migrationBuilder.DropTable(
+                name: "Turma");
+            migrationBuilder.DropTable(
+                name: "Pessoa");
         }
     }
 }
