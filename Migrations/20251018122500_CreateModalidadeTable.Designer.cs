@@ -29,36 +29,13 @@ namespace MvcMovie.Migrations
                     .IsRequired()
                     .HasColumnType("varchar(100)");
 
-                b.Property<int?>("TurmaId")
-                    .HasColumnType("int");
+                b.Property<string>("Descricao")
+                    .IsRequired()
+                    .HasColumnType("varchar(255)");
 
                 b.HasKey("Id");
-
-                b.HasIndex("TurmaId")
-                    .HasDatabaseName("IX_Modalidade_TurmaId");
 
                 b.ToTable("modalidade");
-            });
-
-            modelBuilder.Entity("MvcMovie.Models.Turma", b =>
-            {
-                b.Property<int>("Id")
-                    .ValueGeneratedOnAdd()
-                    .HasColumnType("int");
-
-                // ... outras propriedades da Turma ...
-
-                b.HasKey("Id");
-
-                b.ToTable("turma");
-            });
-
-            modelBuilder.Entity("MvcMovie.Models.Modalidade", b =>
-            {
-                b.HasOne("MvcMovie.Models.Turma", null)
-                    .WithMany()
-                    .HasForeignKey("TurmaId")
-                    .OnDelete(DeleteBehavior.SetNull);
             });
         }
     }
