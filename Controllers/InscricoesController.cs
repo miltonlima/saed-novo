@@ -69,7 +69,7 @@ namespace MvcMovie.Controllers
             if (ModelState.IsValid)
             {
                 inscricao.DataInscricao = DateTime.Now;
-                _context.Add(inscricao);
+                _context.Inscricao.Add(inscricao);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
